@@ -1,0 +1,39 @@
+.shop-list___item-ul {
+  padding: 0 !important;
+  width: 100%;
+}
+
+.shop-list___item {
+  width: 345px;
+  border: 2px solid rgb(237, 237, 241);
+  border-radius: 5px;
+  display: block;
+  margin: 10px;
+}
+
+.shop-list___item:hover {
+  border: 2px solid #28559A;
+}
+
+.shop-list___img {
+  width: 100%;
+}
+
+.shop-list___cart-btn-icon {
+  color: red($color: #000000);
+}
+
+.shop-list___cart-btn-text {
+  margin: 0;
+}
+
+.shop-list__btn-container {
+  margin-left: 25%;
+  margin-bottom: 20px;
+}
+
+.shop-list___cart-btn-cont:hover {
+  background: #28559A;
+  color: white;
+  transition: 0.2s;
+}

@@ -1,7 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
 
+*:focus, *:active {
+  outline: none !important;
+}
+
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;}
 
 body {
   color: rgb(55, 57, 61);
@@ -19,3 +23,14 @@ a:hover {
   text-decoration: none;
 }
 
+.button {
+  color: rgb(55, 57, 61);
+  background: none;
+  border-radius: 10px;
+  width: auto;
+  border: 1px solid rgb(55, 57, 61);
+}
+
+.mr10 {
+  margin-right: 10px;
+}

@@ -1,13 +1,30 @@
 
-.navbar__item {
-  background: lightskyblue;
+.navbar {
+  border-bottom: 2px solid rgb(237, 237, 241);
+  margin: 0;
+  padding: 0;
+}
+
+.navbar__left-btn-block {
+  height: 50px;
 }
 
 .navbar__item {
-  color: rgb(55, 57, 61);
+  position: relative;
+  top: 2px;
+}
+
+.navbar__item a {
   display: block;
+  padding: 10px 25%;
+}
+
+.navbar__item-active {
+  border-bottom: 2px solid rgb(101, 138, 192);
 }
 
 .navbar__icon {
   font-size: 30px;
+  padding: 10px;
 }
+

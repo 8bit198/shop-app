@@ -1,0 +1,16 @@
+<ul class="row shop-list___item-ul container mx-auto">
+  <li class="shop-list___item" *ngFor="let shopItem of goods">
+    <img class="shop-list___img" [src]="'assets/goods-pics/' + shopItem.pic[0]" alt="">
+    <p class="text-center">{{shopItem.name}}</p>
+    <p class="text-center">{{shopItem.price}} руб</p>
+    <div class="d-flex shop-list__btn-container">
+      <button class="button d-flex mr10 shop-list___cart-btn-cont">
+        <i class="large material-icons navbar__icon shop-list___cart-btn-icon">shopping_cart</i>
+        <p class="shop-list___cart-btn-text">В корзину</p>
+      </button>
+      <button class="button d-flex shop-list___cart-btn-cont">
+        <i class="large material-icons navbar__icon shop-list___cart-btn-icon">favorite_border</i>
+      </button>
+    </div>
+  </li>
+</ul>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TabService } from 'src/app/services/service-tab/tab.service';
 
 @Component({
   selector: 'app-wishlist',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class WishlistComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private tabService: TabService
+  ) { }
 
   ngOnInit() {
+    this.tabService.setCurrentTab()
   }
 
 }
