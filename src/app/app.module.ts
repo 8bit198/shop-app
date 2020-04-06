@@ -10,15 +10,22 @@ import { CartModule } from './module-cart/cart.module';
 import { HttpClientModule } from '@angular/common/http';
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService } from './services/db-service/in-memory-data.service';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { TextMaskModule } from 'angular2-text-mask';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
     AppComponent,
   ],
   imports: [
+    CommonModule,
     ShopPageModule,
     CartModule,
     HttpClientModule,
+    FormsModule,
+    TextMaskModule,
+    ReactiveFormsModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,

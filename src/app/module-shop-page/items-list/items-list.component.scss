@@ -6,17 +6,20 @@
 .shop-list___item {
   width: 345px;
   border: 2px solid rgb(237, 237, 241);
-  border-radius: 5px;
+  border-radius: 10px;
   display: block;
   margin: 10px;
 }
 
 .shop-list___item:hover {
-  border: 2px solid #28559A;
+  border: 2px solid #658ac0;
+  border-radius: 10px;
+  transition: 0.2s;
 }
 
 .shop-list___img {
-  width: 100%;
+  width: 90% !important;
+  margin: 0px 0 0 5%;
 }
 
 .shop-list___cart-btn-icon {
@@ -30,10 +33,4 @@
 .shop-list__btn-container {
   margin-left: 25%;
   margin-bottom: 20px;
-}
-
-.shop-list___cart-btn-cont:hover {
-  background: #28559A;
-  color: white;
-  transition: 0.2s;
 }
