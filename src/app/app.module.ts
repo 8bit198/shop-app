@@ -9,14 +9,19 @@ import { ShopPageModule } from './module-shop-page/shop-page.module';
 import { CartModule } from './module-cart/cart.module';
 import { HttpClientModule } from '@angular/common/http';
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
-import { InMemoryDataService } from './services/db-service/in-memory-data.service';
+import { InMemoryDataService } from './services/service-db/in-memory-data.service';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { TextMaskModule } from 'angular2-text-mask';
 import { CommonModule } from '@angular/common';
+import { AddCartDialogComponent } from './module-shop-page/add-cart-dialog/add-cart-dialog.component';
+
+
 
 @NgModule({
   declarations: [
     AppComponent,
+    AddCartDialogComponent,
+
   ],
   imports: [
     CommonModule,
@@ -31,7 +36,10 @@ import { CommonModule } from '@angular/common';
     BrowserAnimationsModule,
     InMemoryWebApiModule.forRoot(InMemoryDataService)
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [AddCartDialogComponent],
+  entryComponents: [AddCartDialogComponent],
+  bootstrap: [
+    AppComponent,
+  ]
 })
 export class AppModule { }

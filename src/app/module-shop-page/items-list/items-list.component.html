@@ -4,11 +4,11 @@
     <p class="text-center">{{shopItem.name}}</p>
     <p class="text-center">{{shopItem.price}} руб</p>
     <div class="d-flex shop-list__btn-container">
-      <button class="button d-flex mr10 shop-list___cart-btn-cont">
+      <button class="button d-flex mr10 shop-list___cart-btn-cont" (click)="onAddCartItem(shopItem)">
         <i class="large material-icons navbar__icon shop-list___cart-btn-icon">shopping_cart</i>
         <p class="shop-list___cart-btn-text">В корзину</p>
       </button>
-      <button class="button d-flex shop-list___cart-btn-cont">
+      <button class="button d-flex shop-list___cart-btn-cont" (click)="onAddWhishlistItem(shopItem)">
         <i class="large material-icons navbar__icon shop-list___cart-btn-icon">favorite_border</i>
       </button>
     </div>

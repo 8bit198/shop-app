@@ -6,6 +6,10 @@ import { InMemoryDbService } from 'angular-in-memory-web-api';
 })
 export class InMemoryDataService implements InMemoryDbService {
 
+  genId(cartItems): number {
+    return cartItems.length > 0 ? Math.max(...cartItems.map(heroine => heroine.id)) + 1 : 11;
+}
+
   constructor() { }
   createDb() {
     const goods = [
@@ -16,6 +20,11 @@ export class InMemoryDataService implements InMemoryDbService {
       { id: 5, name: 'Iphone 11', price: '1000', pic: ['iphone11-1.png', 'iphone11-2.png'] },
       { id: 6, name: 'MacBook Pro 2019', price: '1000', pic: ['macbook-1.jpg', 'macbook-2.jpg'] },
     ];
-    return {goods};
+
+    const cartItems = [];
+
+    const whishlistItems = [];
+
+    return {goods, cartItems, whishlistItems};
   }
 }

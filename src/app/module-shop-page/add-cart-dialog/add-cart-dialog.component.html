@@ -1,0 +1,24 @@
+
+
+    <div class="shopping-cart__goods-list-item d-flex justify-content-between col-12">
+      <div class="shopping-cart__goods-list-item-info d-flex">
+        <img class="" [src]="'assets/goods-pics/' + cartItem.pic[0]" alt="">
+        <div class="d-flex-row">
+          <p class="shopping-cart__item-name-p">Товар: {{cartItem.name}}</p>
+          <p class="shopping-cart__item-price-p">Цена: {{cartItem.price}}</p>
+        </div>
+      </div>
+      <p class="shopping-cart__item-input-p">
+        <label>Количество: 
+          <input type="number" [(ngModel)]="cartItem.quantity">
+        </label>
+      </p>
+    </div>
+    <div class="form-button-group text-center">
+      <button class="button mr10" (click)="onSubmit()">
+        Подтвердить
+      </button>
+      <button class="button" (click)="onCancel()">
+        Отмена
+      </button>
+    </div>

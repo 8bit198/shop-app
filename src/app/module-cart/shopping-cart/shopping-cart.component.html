@@ -1,6 +1,32 @@
 <div *ngIf="errorMessage" class="alert-message-container error-alert">{{errorMessage}}</div>
 <div *ngIf="successMessage" class="alert-message-container success-alert">{{successMessage}}</div>
 <div class="container">
+  <ul class="shopping-cart__goods-list col-6 mx-auto">
+    <li class="shopping-cart__goods-list-item d-flex justify-content-between col-12 p0" *ngFor="let item of currentCartItems">
+      <div class="shopping-cart__goods-list-item-info d-flex">
+        <img class="" [src]="'assets/goods-pics/' + item.pic[0]" alt="">
+        <div class="d-flex-row">
+          <p class="shopping-cart__item-name-p">Товар: {{item.name}}</p>
+          <p class="shopping-cart__item-price-p">Цена: {{item.price}}</p>
+          <p class="shopping-cart__item-input-p">
+            <label>Количество: 
+              <input type="number" [(ngModel)]="item.quantity">
+            </label>
+          </p>
+        </div>
+      </div>
+      <p>
+        <button class="button button-big" (click)="onDelete(item.id)">
+          <i class="material-icons">delete</i>
+        </button>
+        <button class="button d-flex shop-list___cart-btn-cont" (click)="onAddWhishlistItem(item)">
+          <i class="large material-icons navbar__icon shop-list___cart-btn-icon">favorite_border</i>
+        </button>
+      </p>
+      <p>
+      </p>
+    </li>
+  </ul>
   <div class="shopping-cart__user-info-container row">
     <form 
     [formGroup]="customerInfoForm" 
@@ -12,15 +38,14 @@
           <input 
           type="text" 
           [formControl]="name"
-          [ngClass]="'shopping-cart__input ' + (name.invalid && (name.dirty) ? 'back-red' : '')">
+          [ngClass]="'shopping-cart__input ' + (((name.invalid || !name.value) && isFormSubmitted) ? 'back-red' : '')">
         </div>
         <div class="shopping-cart__input-container col">
           <p class="shopping-cart__p">Email</p>
           <input 
-          (blur)="isEmailBlured = true"
           type="text" 
           [formControl]="email"
-          [ngClass]="'shopping-cart__input ' + ((email.invalid && isEmailBlured) ? 'back-red' : '')">      
+          [ngClass]="'shopping-cart__input ' + (((email.invalid || !email.value) && isFormSubmitted) ? 'back-red' : '')">      
         </div>
       </div>
       <div class="d-flex col-6 p0">
@@ -29,7 +54,7 @@
           <input 
           type="text" 
           [formControl]="adress"
-          [ngClass]="'shopping-cart__input ' + (adress.invalid && (adress.dirty) ? 'back-red' : '')"> 
+          [ngClass]="'shopping-cart__input ' + (((adress.invalid || !adress.value) && isFormSubmitted) ? 'back-red' : '')"> 
         </div>
         <div class="shopping-cart__input-container col">
           <p class="shopping-cart__p">Телефон</p>
@@ -37,7 +62,7 @@
           [textMask]="{mask: phoneMask}" 
           type="text" 
           [formControl]="phoneNumber"
-          [ngClass]="'shopping-cart__input ' + (adress.invalid && (adress.dirty) ? 'back-red' : '')"> 
+          [ngClass]="'shopping-cart__input ' + (((phoneNumber.invalid || !phoneNumber.value) && isFormSubmitted) ? 'back-red' : '')"> 
         </div>
       </div>
       <div class="shopping-cart__input-container shopping-cart__input-container-textarea p0 col-12">

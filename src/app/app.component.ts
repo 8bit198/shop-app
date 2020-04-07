@@ -14,7 +14,6 @@ export class AppComponent implements AfterContentChecked {
 
   ngAfterContentChecked() {
     this.currentTab = this.router.url.split('/')[1];
-    console.log('this.currentTab: ', this.currentTab);
   }
 
 }

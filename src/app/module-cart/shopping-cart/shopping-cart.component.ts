@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { TabService } from 'src/app/services/service-tab/tab.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import NotificationHelper from 'src/app/helpers/notification-helper';
+import { ShopItemsService, ICartItems } from 'src/app/services/service-shop-tems/shop-items.service';
+import { InMemoryDataService } from 'src/app/services/service-db/in-memory-data.service';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -9,9 +11,11 @@ import NotificationHelper from 'src/app/helpers/notification-helper';
   styleUrls: ['./shopping-cart.component.scss']
 })
 export class ShoppingCartComponent extends NotificationHelper implements OnInit  {
+  public isFormSubmitted = false;
+
   public currentTab: string;
 
-  public isEmailBlured = false;
+  public currentCartItems;
 
   public phoneMask = ['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
 
@@ -30,31 +34,47 @@ export class ShoppingCartComponent extends NotificationHelper implements OnInit 
   get message() {return this.customerInfoForm.get('message'); }
 
   constructor(
+    private shopItemsService: ShopItemsService,
     private tabService: TabService
   ) {
     super();
   }
 
+  getCartItems(){
+    this.shopItemsService.getCartItems().subscribe(res => {
+      console.log('res: ', res);
+      this.currentCartItems = res
+      console.log('this.currentCartItems: ', this.currentCartItems)
+    }, err => console.log(err))
+  }
+
   ngOnInit(): void {
     this.tabService.setCurrentTab();
     this.currentTab = this.tabService.currentTab;
+    console.log('items = ', this.currentCartItems)
+    this.getCartItems();
   }
 
-  areAllFieldsFilled() {
-    if(
-      this.name.value === '' ||
-      this.email.value === '' ||
-      this.adress.value === '' ||
-      this.phoneNumber.value === ''
-    ) {
-      return false;
-    }
-    return true;
+  onAddWhishlistItem(item) {
+    item = { ...item, quantity: 1, createdAt: new Date()}
+    this.shopItemsService.addWhishlisttItem(item).subscribe();
+    this.deleteCartItem(item.id);
+  }
+
+  deleteCartItem(id) {
+    this.shopItemsService.deleteCartItems(id).subscribe(
+      res => {
+        this.getCartItems();
+      }
+    )
+  }
+
+  onDelete(id) {
+    this.deleteCartItem(id);
   }
 
   checkFormForErrors() {
-    console.log('this.phoneNumber: ', this.phoneNumber.value)
-    if (!this.areAllFieldsFilled()) {
+    if (!this.areAllFieldsFilled(this.customerInfoForm.value, 'message')) {
       this.onError('Заполните все поля');
       return false;
     } else if (this.name.invalid) {
@@ -74,7 +94,7 @@ export class ShoppingCartComponent extends NotificationHelper implements OnInit 
   }
 
   onSubmit() {
-    console.log('this.checkFormForErrors():' , this.checkFormForErrors());
+    this.isFormSubmitted = true;
     if (this.checkFormForErrors()) {
       console.log('Send', this.name);
       this.onSuccess('Заказ готовится к отправке');
