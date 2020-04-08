@@ -1,29 +1,34 @@
 <div class="container">
   <ul class="shopping-cart__goods-list col-6 mx-auto">
-    <li class="shopping-cart__goods-list-item d-flex justify-content-between col-12 p0" *ngFor="let item of currentWishlistItems">
-      <div class="shopping-cart__goods-list-item-info d-flex">
-        <img class="" [src]="'assets/goods-pics/' + item.pic[0]" alt="">
-        <div class="d-flex-row">
-          <p class="shopping-cart__item-name-p">Товар: {{item.name}}</p>
-          <p class="shopping-cart__item-price-p">Цена: {{item.price}}</p>
-          <p class="shopping-cart__item-input-p">
-            <label>Количество: 
-              <input type="number" [(ngModel)]="item.quantity">
-            </label>
-          </p>
+    <ng-container *ngIf="shopItemsService.currentWishlistItems && shopItemsService.currentWishlistItems.length; else ElseBlock">
+      <li class="shopping-cart__goods-list-item d-flex justify-content-between col-12 p0" *ngFor="let item of shopItemsService.currentWishlistItems">
+        <div class="shopping-cart__goods-list-item-info d-flex">
+          <img class="" [src]="'assets/goods-pics/' + item.pic[0]" alt="">
+          <div class="d-flex-row">
+            <p class="shopping-cart__item-name-p">Товар: {{item.name}}</p>
+            <p class="shopping-cart__item-price-p">Цена: {{item.price}}</p>
+            <p class="shopping-cart__item-input-p">
+              <label>Количество: 
+                <input type="number" [(ngModel)]="item.quantity">
+              </label>
+            </p>
+          </div>
         </div>
-      </div>
-      <p>
-        <button class="button button-big" (click)="onDelete(item.id)">
-          <i class="material-icons">delete</i>
-        </button>
-        <button class="button d-flex shop-list___cart-btn-cont" (click)="onAddToCart(item)">
-          <i class="large material-icons navbar__icon shop-list___cart-btn-icon">shopping_cart</i>
-        </button>
-      </p>
-      <p>
-      </p>
-    </li>
+        <p>
+          <button class="button button-big mb10 d-flex shop-list___cart-btn-cont" (click)="onAddToCart(item)">
+            <i class="large material-icons navbar__icon shop-list___cart-btn-icon">shopping_cart</i>
+          </button>
+          <button class="button button-big" (click)="onDelete(item.id)">
+            <i class="material-icons">delete</i>
+          </button>
+        </p>
+        <p>
+        </p>
+      </li>
+    </ng-container>
+    <ng-template #ElseBlock>
+      <div сlass="empty-cart">Список желаемого пуст</div>
+    </ng-template>
   </ul>
   <div class="shopping-cart__user-info-container row">
   </div>

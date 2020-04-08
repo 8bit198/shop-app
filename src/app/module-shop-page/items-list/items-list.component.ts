@@ -14,7 +14,7 @@ export class ItemsListComponent implements OnInit {
   public currentTab: string;
 
   constructor(
-    private shopItemsService: ShopItemsService,
+    public shopItemsService: ShopItemsService,
     private tabService: TabService,
     public dialog: MatDialog) { }
 
@@ -30,7 +30,16 @@ export class ItemsListComponent implements OnInit {
 
   onAddWhishlistItem(item) {
     item = { ...item, quantity: 1, createdAt: new Date()}
-    this.shopItemsService.addWhishlisttItem(item).subscribe();
+    this.shopItemsService.addWhishlisttItem(item).subscribe(
+      () => {this.shopItemsService.getWhishlistItems().subscribe(
+        res => {
+          this.shopItemsService.currentWishlistItems = res;
+          this.shopItemsService.whishlistActivate(this.shopItemsService.currentWishlistItems.length);
+        }
+      )
+    }
+    );
+    
   }
 
   onAddCartItem(cartItem): void {

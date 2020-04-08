@@ -12,6 +12,11 @@
   padding-top: 10px;
 }
 
+.shopping-cart__goods-list > div {
+  text-align: center;
+  color:#b4b4b4;
+}
+
 .shopping-cart__goods-list-item {
   border-bottom: 1px solid #b4b4b4;
   padding-bottom: 5px;
@@ -33,7 +38,7 @@
 .shopping-cart__user-info-form, .shopping-cart__goods-list {
   border: 2px solid #e4e4e4;
   border-radius: 10px;
-  padding-bottom: 20px;
+  padding-bottom: 10px;
 }
 
 .shopping-cart__textarea {

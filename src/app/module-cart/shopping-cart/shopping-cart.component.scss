@@ -10,6 +10,7 @@
 
 .shopping-cart__goods-list {
   padding-top: 10px;
+  margin-top: 10px;
 }
 
 .shopping-cart__goods-list-item {
@@ -30,10 +31,20 @@
   
 }
 
+.shopping-cart__user-info-container {
+  width: 100%;
+  margin-left: 0%;
+}
+
 .shopping-cart__user-info-form, .shopping-cart__goods-list {
   border: 2px solid #658ac0;
   border-radius: 10px;
-  padding-bottom: 20px;
+  padding-bottom: 10px;
+}
+
+.shopping-cart__goods-list > div {
+  text-align: center;
+  color:#658ac0;
 }
 
 .shopping-cart__textarea {
@@ -55,8 +66,6 @@
   margin-bottom: 0;
 }
 
-
-.shopping-cart__item-price-p {
-
+.shop-list___cart-btn-cont {
+  
 }
-

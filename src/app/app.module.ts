@@ -21,7 +21,6 @@ import { AddCartDialogComponent } from './module-shop-page/add-cart-dialog/add-c
   declarations: [
     AppComponent,
     AddCartDialogComponent,
-
   ],
   imports: [
     CommonModule,

@@ -1,13 +1,38 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable} from 'rxjs';
+import { Observable, Subject} from 'rxjs';
 import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ShopItemsService {
-  SERVER_URL = `/api`;
+  private SERVER_URL = `/api`;
+
+  public currentWishlistItems;
+
+  public currentCartItems;
+
+  private cartlistActivatedSource = new Subject();
+
+  private whishlistActivatedSource = new Subject();
+
+  whishlistActivated$ = this.whishlistActivatedSource.asObservable();
+
+  cartlistActivated$ = this.cartlistActivatedSource.asObservable();
+
+  whishlistActivate(length) {
+    this.whishlistActivatedSource.next(length);
+  }
+
+  cartlistActivate(length) {
+    let summ = 0;
+    for (const item of this.currentCartItems) {
+      summ = summ + item.price * item.quantity;
+    }
+
+    this.cartlistActivatedSource.next({length, summ});
+  }
 
   constructor(
     private http: HttpClient

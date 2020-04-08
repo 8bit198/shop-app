@@ -15,29 +15,40 @@
       </div>
     </div>
     <div class="d-flex col-lg-4  offset-lg-4">
-      <div [routerLink]="['/wishlist']" 
-      routerLinkActive="router-link-active"  
+      <div
+      (click)="onWhishlistClicked()"
       [ngClass]="'navbar__item col-lg-6 d-flex flex-row ' + (currentTab === 'wishlist' ? 'navbar__item-active' : '')"> 
         <div>
           <i class="large material-icons navbar__icon">favorite</i>
         </div>
         <div>
-          NaN товаров 
+          {{wishlistLength}} товаров 
         </div>
       </div>
-      <div 
+      <ul *ngIf="showPopup && shopItemsService.currentWishlistItems.length" 
+      class="whishlist-dropdown-menu p0"
       [routerLink]="['/wishlist']" 
       routerLinkActive="router-link-active"  
+      >
+        <li *ngFor="let item of shopItemsService.currentWishlistItems" class="whishlist-dropdown-menu__item d-flex flex-row">
+          <img class="whishlist-preview___img" [src]="'assets/goods-pics/' + item.pic[0]" alt="">
+          <div class="whishlist-preview___text">
+            <div class="whishlist-preview___text-child-1">Товар: {{item.name}}</div> 
+            <div>Добавлено: {{dateBeautify(item.createdAt)}}</div>
+          </div>
+        </li>
+      </ul>
+      <div 
       [ngClass]="'navbar__item col-lg-6 d-flex flex-row'">
         <div>
           <i class="large material-icons navbar__icon">shopping_cart</i>
         </div>
         <div>
           <div>
-            В корзине: NaN 
+            В корзине: {{cartlistLength}} 
           </div>
           <div>
-            На сумму: NaN 
+            На сумму: {{cartlistSumm}} 
           </div>
         </div>
       </div> 

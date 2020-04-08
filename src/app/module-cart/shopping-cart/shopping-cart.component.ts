@@ -11,6 +11,8 @@ import { InMemoryDataService } from 'src/app/services/service-db/in-memory-data.
   styleUrls: ['./shopping-cart.component.scss']
 })
 export class ShoppingCartComponent extends NotificationHelper implements OnInit  {
+  public JSONmessage: string;
+
   public isFormSubmitted = false;
 
   public currentTab: string;
@@ -20,7 +22,7 @@ export class ShoppingCartComponent extends NotificationHelper implements OnInit 
   public phoneMask = ['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
 
   public customerInfoForm = new FormGroup({
-    name: new FormControl('', [Validators.required, Validators.pattern(/^[^±!@£$%^&*_+§¡€#¢§¶•ªº«\\/<>?:;|=.,]{1,100}$/)]),
+    name: new FormControl('', [Validators.required, Validators.pattern(/^[^±!@£$%^&*_+§¡€#¢§¶•ªº«\\/<>?:;|=.,0-9]{1,100}$/)]),
     email: new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')]),
     adress: new FormControl('', [Validators.required, Validators.pattern(/^[^±!@£$%^&*_+§¡€#¢§¶•ªº«<>?:;|=.,]{1,100}$/)]),
     phoneNumber: new FormControl(''),
@@ -34,7 +36,7 @@ export class ShoppingCartComponent extends NotificationHelper implements OnInit 
   get message() {return this.customerInfoForm.get('message'); }
 
   constructor(
-    private shopItemsService: ShopItemsService,
+    public shopItemsService: ShopItemsService,
     private tabService: TabService
   ) {
     super();
@@ -43,21 +45,35 @@ export class ShoppingCartComponent extends NotificationHelper implements OnInit 
   getCartItems(){
     this.shopItemsService.getCartItems().subscribe(res => {
       console.log('res: ', res);
-      this.currentCartItems = res
-      console.log('this.currentCartItems: ', this.currentCartItems)
+      this.shopItemsService.currentCartItems = res;
+      this.shopItemsService.cartlistActivate(this.shopItemsService.currentCartItems)
     }, err => console.log(err))
   }
 
   ngOnInit(): void {
     this.tabService.setCurrentTab();
     this.currentTab = this.tabService.currentTab;
-    console.log('items = ', this.currentCartItems)
+    console.log('items = ', this.shopItemsService.currentCartItems)
     this.getCartItems();
   }
 
   onAddWhishlistItem(item) {
     item = { ...item, quantity: 1, createdAt: new Date()}
-    this.shopItemsService.addWhishlisttItem(item).subscribe();
+    this.shopItemsService.addWhishlisttItem(item).subscribe(
+      res => {
+        this.shopItemsService.getWhishlistItems().subscribe(
+        res => {
+          this.shopItemsService.currentWishlistItems = res;
+          this.shopItemsService.whishlistActivate(this.shopItemsService.currentWishlistItems.length);
+        });
+        this.shopItemsService.getCartItems().subscribe(
+          res => {
+            this.shopItemsService.currentCartItems = res;
+            this.shopItemsService.cartlistActivate(this.shopItemsService.currentCartItems);
+          }
+        );
+    }
+    );
     this.deleteCartItem(item.id);
   }
 
@@ -95,9 +111,12 @@ export class ShoppingCartComponent extends NotificationHelper implements OnInit 
 
   onSubmit() {
     this.isFormSubmitted = true;
-    if (this.checkFormForErrors()) {
-      console.log('Send', this.name);
+    if (!this.shopItemsService.currentCartItems.length) {
+      this.onError('Добавьте товары и заполните поля');
+    } else if (this.checkFormForErrors()) {
+      this.JSONmessage = JSON.stringify({customerInfo: this.customerInfoForm.value, cartItems: this.shopItemsService.currentCartItems});
       this.onSuccess('Заказ готовится к отправке');
+      console.log('Send', this.JSONmessage);
     }
   }
 

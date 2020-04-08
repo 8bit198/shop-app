@@ -12,6 +12,7 @@
 .navbar__item {
   position: relative;
   top: 2px;
+  cursor: pointer;
 }
 
 .navbar__item a {
@@ -26,5 +27,34 @@
 .navbar__icon {
   font-size: 30px;
   padding: 10px;
+}
+
+.whishlist-dropdown-menu {
+  z-index: 1;
+  position: absolute;
+  border-right: 2px solid rgb(101, 138, 192);
+  border-left: 2px solid rgb(101, 138, 192);
+  border-bottom: 2px solid rgb(101, 138, 192);
+  background: white;
+  top: 100%;
+  width: 40%;
+  padding: 5px;
+  font-size: 0.8rem;
+}
+
+.whishlist-preview___img {
+  display: block;
+  height: 50px;
+  margin-top: 6%;
+  margin-right: 4%;
+}
+
+.whishlist-dropdown-menu__item {
+  padding: 5px;
+  border-bottom: 1px solid rgb(221, 221, 221);
+}
+
+.whishlist-preview___text {
+  padding: 7% 0;
 }
 

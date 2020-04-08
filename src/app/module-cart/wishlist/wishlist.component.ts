@@ -10,10 +10,10 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrls: ['./wishlist.component.scss']
 })
 export class WishlistComponent implements OnInit {
-  public currentWishlistItems;
+  // public currentWishlistItems;
 
   constructor(
-    private shopItemsService: ShopItemsService,
+    public shopItemsService: ShopItemsService,
     private tabService: TabService,
     public dialog: MatDialog
   ) { }
@@ -21,8 +21,8 @@ export class WishlistComponent implements OnInit {
   getWishlistItems() {
     this.shopItemsService.getWhishlistItems().subscribe(
       res => {
-        this.currentWishlistItems = res;
-        console.log('this.currentWishlistItems: ', this.currentWishlistItems)
+        this.shopItemsService.currentWishlistItems = res;
+        console.log('this.currentWishlistItems: ', this.shopItemsService.currentWishlistItems)
       }
     )
   }
@@ -30,6 +30,7 @@ export class WishlistComponent implements OnInit {
   deleteFromWishlist(id) {
     this.shopItemsService.deleteWhishlistItems(id).subscribe(
       res => {
+        this.shopItemsService.whishlistActivate(this.shopItemsService.currentWishlistItems.length - 1);
         this.getWishlistItems();
       }
     )
@@ -51,7 +52,9 @@ export class WishlistComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      this.onDelete(wishlistItem.id);
+      if (result === 'add') {
+        this.onDelete(wishlistItem.id);
+      }
       this.getWishlistItems();
     });
   }

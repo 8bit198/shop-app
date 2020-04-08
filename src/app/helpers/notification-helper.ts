@@ -30,4 +30,18 @@ export default class NotificationHelper {
     return true;
   }
 
+  dateBeautify(dateRaw) {
+    const date = new Date(dateRaw);
+    const day = date.getDate().toString();
+    const month = (date.getMonth() + 1) < 10 ? `0${date.getMonth() + 1}` : (date.getMonth() + 1).toString();
+    const year = date.getFullYear().toString();
+
+    return `${day}.${month}.${year}  ${date.getHours()}:${date.getMinutes()}`
+  }
+}
+
+export function compareByDate(a, b) {
+  if (a.createdAt < b.createdAt) { return 1; }
+  if (a.createdAt > b.createdAt) { return -1; }
+  return 0;
 }
