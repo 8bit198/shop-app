@@ -24,7 +24,7 @@ export class ShoppingCartComponent extends NotificationHelper implements OnInit 
   public customerInfoForm = new FormGroup({
     name: new FormControl('', [Validators.required, Validators.pattern(/^[^±!@£$%^&*_+§¡€#¢§¶•ªº«\\/<>?:;|=.,0-9]{1,100}$/)]),
     email: new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')]),
-    adress: new FormControl('', [Validators.required, Validators.pattern(/^[^±!@£$%^&*_+§¡€#¢§¶•ªº«<>?:;|=.,]{1,100}$/)]),
+    adress: new FormControl('', [Validators.required, Validators.pattern(/^[^±!@£$%^&*_+§¡€#¢§¶•ªº<>?:;|=]{1,100}$/)]),
     phoneNumber: new FormControl(''),
     message: new FormControl(''),
   });

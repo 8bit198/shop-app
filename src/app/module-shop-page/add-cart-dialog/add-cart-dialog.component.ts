@@ -25,7 +25,7 @@ export class AddCartDialogComponent {
         }
       );
     });
-  } 
+  }
 
   onCancel(): void {
     this.dialogRef.close();

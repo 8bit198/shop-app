@@ -18,10 +18,8 @@ export default class NotificationHelper {
   }
 
   areAllFieldsFilled(formValues, exeption) {
-    console.log('formValues: ', formValues)
     for (const key in formValues) {
       if (formValues.hasOwnProperty(key)) {
-        console.log(key, exeption)
         if (!formValues[key] && key !== exeption) {
           return false;
         }
@@ -36,7 +34,7 @@ export default class NotificationHelper {
     const month = (date.getMonth() + 1) < 10 ? `0${date.getMonth() + 1}` : (date.getMonth() + 1).toString();
     const year = date.getFullYear().toString();
 
-    return `${day}.${month}.${year}  ${date.getHours()}:${date.getMinutes()}`
+    return `${day}.${month}.${year}  ${date.getHours()}:${date.getMinutes()}`;
   }
 }
 

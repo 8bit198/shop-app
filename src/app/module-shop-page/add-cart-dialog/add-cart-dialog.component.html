@@ -5,12 +5,12 @@
         <img class="" [src]="'assets/goods-pics/' + cartItem.pic[0]" alt="">
         <div class="d-flex-row">
           <p class="shopping-cart__item-name-p">Товар: {{cartItem.name}}</p>
-          <p class="shopping-cart__item-price-p">Цена: {{cartItem.price}}</p>
+          <p class="shopping-cart__item-price-p">Цена: {{cartItem.price}} руб.</p>
         </div>
       </div>
       <p class="shopping-cart__item-input-p">
         <label>Количество: 
-          <input type="number" [(ngModel)]="cartItem.quantity">
+          <input type="number" [(ngModel)]="cartItem.quantity" min="1">
         </label>
       </p>
     </div>

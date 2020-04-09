@@ -21,7 +21,7 @@
         <div>
           <i class="large material-icons navbar__icon">favorite</i>
         </div>
-        <div>
+        <div class="navbar__wishlist-info">
           {{wishlistLength}} товаров 
         </div>
       </div>
@@ -39,6 +39,7 @@
         </li>
       </ul>
       <div 
+      [routerLink]="['/cart']" 
       [ngClass]="'navbar__item col-lg-6 d-flex flex-row'">
         <div>
           <i class="large material-icons navbar__icon">shopping_cart</i>
@@ -48,7 +49,7 @@
             В корзине: {{cartlistLength}} 
           </div>
           <div>
-            На сумму: {{cartlistSumm}} 
+            На сумму: {{cartlistSumm}} руб.
           </div>
         </div>
       </div> 
