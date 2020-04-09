@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TabService } from 'src/app/services/service-tab/tab.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import NotificationHelper from 'src/app/helpers/notification-helper';
-import { ShopItemsService, ICartItems } from 'src/app/services/service-shop-tems/shop-items.service';
-import { InMemoryDataService } from 'src/app/services/service-db/in-memory-data.service';
+import { ShopItemsService } from 'src/app/services/service-shop-tems/shop-items.service';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -44,23 +43,21 @@ export class ShoppingCartComponent extends NotificationHelper implements OnInit 
 
   getCartItems(){
     this.shopItemsService.getCartItems().subscribe(res => {
-      console.log('res: ', res);
       this.shopItemsService.currentCartItems = res;
       this.shopItemsService.cartlistActivate(this.shopItemsService.currentCartItems)
-    }, err => console.log(err))
+    });
   }
 
   ngOnInit(): void {
     this.tabService.setCurrentTab();
     this.currentTab = this.tabService.currentTab;
-    console.log('items = ', this.shopItemsService.currentCartItems)
     this.getCartItems();
   }
 
   onAddWhishlistItem(item) {
-    item = { ...item, quantity: 1, createdAt: new Date()}
+    item = { ...item, quantity: 1, createdAt: new Date()};
     this.shopItemsService.addWhishlisttItem(item).subscribe(
-      res => {
+      () => {
         this.shopItemsService.getWhishlistItems().subscribe(
         res => {
           this.shopItemsService.currentWishlistItems = res;
@@ -79,10 +76,10 @@ export class ShoppingCartComponent extends NotificationHelper implements OnInit 
 
   deleteCartItem(id) {
     this.shopItemsService.deleteCartItems(id).subscribe(
-      res => {
+      () => {
         this.getCartItems();
       }
-    )
+    );
   }
 
   onDelete(id) {
@@ -116,7 +113,6 @@ export class ShoppingCartComponent extends NotificationHelper implements OnInit 
     } else if (this.checkFormForErrors()) {
       this.JSONmessage = JSON.stringify({customerInfo: this.customerInfoForm.value, cartItems: this.shopItemsService.currentCartItems});
       this.onSuccess('Заказ готовится к отправке');
-      console.log('Send', this.JSONmessage);
     }
   }
 

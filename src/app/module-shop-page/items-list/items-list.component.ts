@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ShopItemsService } from 'src/app/services/service-shop-tems/shop-items.service';
 import { TabService } from 'src/app/services/service-tab/tab.service';
 import { MatDialog } from '@angular/material/dialog';
@@ -36,21 +36,16 @@ export class ItemsListComponent implements OnInit {
           this.shopItemsService.currentWishlistItems = res;
           this.shopItemsService.whishlistActivate(this.shopItemsService.currentWishlistItems.length);
         }
-      )
+      );
     }
     );
-    
   }
 
   onAddCartItem(cartItem): void {
-    cartItem = { ...cartItem, quantity: 1}
+    cartItem = { ...cartItem, quantity: 1 };
     const dialogRef = this.dialog.open(AddCartDialogComponent, {
       width: '500px',
       data: cartItem
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
     });
   }
 

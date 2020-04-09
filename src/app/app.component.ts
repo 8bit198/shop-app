@@ -29,27 +29,20 @@ export class AppComponent extends NotificationHelper implements AfterContentChec
     private router: Router,
     public shopItemsService: ShopItemsService) {
       super();
-      router.events.subscribe(() => this.showPopup = false)
+      router.events.subscribe(() => this.showPopup = false);
       shopItemsService.whishlistActivated$.subscribe(
         res => {
           this.wishlistLength = res.toString()
-        })
+        });
       shopItemsService.cartlistActivated$.subscribe(
         (res: any) => {
-          console.log('res: ', res.length.length)
           this.cartlistLength = res.length.length;
           this.cartlistSumm = res.summ;
-        })
+        });
     }
 
   ngAfterContentChecked() {
-    // if(this.shopItemsService.currentWishlistItems) {
-    //   this.num = this.shopItemsService.currentWishlistItems.length.toString();
-    //   console.log('this.num = ', this.num)
-    // }
-    // console.log('this.shopItemsService.currentWishlistItems = ', this.shopItemsService.currentWishlistItems)
     this.currentTab = this.router.url.split('/')[1];
-
   }
 
   ngOnInit() {
@@ -71,7 +64,6 @@ export class AppComponent extends NotificationHelper implements AfterContentChec
   onWhishlistClicked() {
     this.showPopup = !this.showPopup;
     this.getWhishlistItems();
-    console.log(this.shopItemsService.currentWishlistItems)
   }
 
 }

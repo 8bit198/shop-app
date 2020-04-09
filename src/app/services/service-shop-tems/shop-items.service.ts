@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, Subject} from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Subject} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -43,7 +42,6 @@ export class ShopItemsService {
   }
 
   addCartItem(cartItem: {id: number, name: string, price: string, pic: string[]}) {
-    console.log(cartItem)
     return this.http.post(`${this.SERVER_URL}/cartItems`, cartItem);
   }
 
@@ -52,7 +50,6 @@ export class ShopItemsService {
   }
 
   deleteCartItems(id) {
-    console.log('id: ', id)
     return this.http.delete(`${this.SERVER_URL}/cartItems/${id}`);
   }
 
@@ -65,19 +62,6 @@ export class ShopItemsService {
   }
 
   deleteWhishlistItems(id) {
-    console.log('id: ', id)
     return this.http.delete(`${this.SERVER_URL}/whishlistItems/${id}`);
   }
-}
-
-interface IGoods {
-  id: number;
-  name: string;
-}
-
-export interface ICartItems {
-  id: number;
-  name: string;
-  price: string;
-  pic: string[]
 }

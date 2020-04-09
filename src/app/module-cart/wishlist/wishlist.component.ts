@@ -10,7 +10,6 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrls: ['./wishlist.component.scss']
 })
 export class WishlistComponent implements OnInit {
-  // public currentWishlistItems;
 
   constructor(
     public shopItemsService: ShopItemsService,
@@ -22,9 +21,8 @@ export class WishlistComponent implements OnInit {
     this.shopItemsService.getWhishlistItems().subscribe(
       res => {
         this.shopItemsService.currentWishlistItems = res;
-        console.log('this.currentWishlistItems: ', this.shopItemsService.currentWishlistItems)
       }
-    )
+    );
   }
 
   deleteFromWishlist(id) {
@@ -33,7 +31,7 @@ export class WishlistComponent implements OnInit {
         this.shopItemsService.whishlistActivate(this.shopItemsService.currentWishlistItems.length - 1);
         this.getWishlistItems();
       }
-    )
+    );
   }
 
   ngOnInit() {

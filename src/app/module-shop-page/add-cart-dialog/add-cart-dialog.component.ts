@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { ShopItemsService } from 'src/app/services/service-shop-tems/shop-items.service';
 
@@ -17,7 +17,7 @@ export class AddCartDialogComponent {
 
   onSubmit() {
     this.shopItemsService.addCartItem(this.cartItem).subscribe(() => {
-      this.dialogRef.close('add')
+      this.dialogRef.close('add');
       this.shopItemsService.getCartItems().subscribe(
         res => {
           this.shopItemsService.currentCartItems = res;
